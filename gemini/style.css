@@ -182,3 +182,9 @@ header h1 { font-size: 1.2rem; font-weight: 600; }
     from { margin-left: -40%; }
     to { margin-left: 100%; }
 }
+
+#chat-app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}

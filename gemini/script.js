@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyDAI8aMpyttkQXq_y1U_lB7oCV5JPUun8Q";
+const API_KEY = "AIzaSyCpK_dFuwh1tYG3ECT3a_KScw10EmC36qE";
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 const INSTRUCTION_URL = 'https://raw.githubusercontent.com/brightboardeducation/test/main/brightboard_bots/o_level_ce.json';
 const STORAGE_KEY = 'chat_history_ce';
@@ -113,6 +113,7 @@ function loadHistory() {
 }
 
 init();
+
 
 
 

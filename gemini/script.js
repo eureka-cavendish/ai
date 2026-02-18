@@ -1,14 +1,16 @@
-const API_KEY = "AIzaSyDAI8aMpyttkQXq_y1U_lB7oCV5JPUun8Q";
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-const INSTRUCTION_URL = 'https://raw.githubusercontent.com/eureka-cavendish/ai/main/knowledge.json';
+const API_KEY = "AIzaSyDSzcpNi-E-JNIizWAnn2YTMePfnUgCVS4";
+const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent';
+const INSTRUCTION_URL = 'https://raw.githubusercontent.com/brightboardeducation/test/main/brightboard_bots/o_level_ce.json';
 const STORAGE_KEY = 'chat_history_ce';
 
 let instructionData = { systemInstruction: '', customKnowledge: '' };
 const chatContainer = document.getElementById('chat-container');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
+const menuBtn = document.getElementById('menu-btn');
+const dropdownMenu = document.getElementById('dropdown-menu');
+const clearBtn = document.getElementById('clear-chat-btn');
 
-// Initialize App
 async function init() {
     try {
         const response = await fetch(INSTRUCTION_URL);
@@ -25,6 +27,30 @@ async function init() {
     loadHistory();
 }
 
+// Auto-resize textarea
+userInput.addEventListener('input', () => {
+    userInput.style.height = 'auto';
+    userInput.style.height = userInput.scrollHeight + 'px';
+});
+
+// Dropdown Toggle
+menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('hidden');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => dropdownMenu.classList.add('hidden'));
+
+// Clear Chat Logic
+clearBtn.addEventListener('click', () => {
+    if (confirm("Clear all messages?")) {
+        chatContainer.innerHTML = '';
+        localStorage.removeItem(STORAGE_KEY);
+        dropdownMenu.classList.add('hidden');
+    }
+});
+
 function appendMessage(text, isUser) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
@@ -35,7 +61,6 @@ function appendMessage(text, isUser) {
 
 async function getGeminiResponse(prompt) {
     const fullPrompt = `${instructionData.customKnowledge} \n\n--- User Query: ${prompt}`;
-    
     const payload = {
         contents: [{ parts: [{ text: fullPrompt }] }],
         systemInstruction: { parts: [{ text: instructionData.systemInstruction }] }
@@ -58,6 +83,7 @@ chatForm.addEventListener('submit', async (e) => {
 
     appendMessage(text, true);
     userInput.value = '';
+    userInput.style.height = 'auto'; // Reset height
     saveHistory();
 
     document.getElementById('loading-indicator').classList.remove('hidden');
@@ -86,8 +112,4 @@ function loadHistory() {
     history.forEach(m => appendMessage(m.text, m.isUser));
 }
 
-
 init();
-
-
-

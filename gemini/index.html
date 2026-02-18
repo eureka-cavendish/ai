@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brightboard AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p>Loading Chatbot Persona...</p>
+    </div>
+
+    <div id="chat-app" class="hidden">
+        <header>
+            <h1>Brightboard Chatbot</h1>
+        </header>
+        
+        <div class="info-banner">
+            Chatbot information loaded dynamically! It can make mistakes. Ensure Stable Internet Connection.
+        </div>
+
+        <div id="chat-container">
+            </div>
+
+        <div id="loading-indicator" class="hidden">
+            <div class="linear-progress"></div>
+        </div>
+
+        <form id="chat-form">
+            <textarea id="user-input" placeholder="Write something..." rows="1"></textarea>
+            <button type="submit" id="send-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+            </button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
